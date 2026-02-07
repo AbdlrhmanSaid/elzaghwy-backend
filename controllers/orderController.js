@@ -83,3 +83,27 @@ export const getAllOrders = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+export const deleteOrder = async (req, res) => {
+  try {
+    const { orderNumber } = req.params;
+    const deletedOrder = await Order.findOneAndDelete({ orderNumber });
+
+    if (!deletedOrder) {
+      return res.status(404).json({ message: "الطلب غير موجود" });
+    }
+
+    res.status(200).json({ message: "تم مسح الطلب بنجاح" });
+  } catch (err) {
+    res.status(500).json({ message: "خطأ في حذف الطلب", error: err.message });
+  }
+};
+
+export const deleteAllOrders = async (req, res) => {
+  try {
+    await Order.deleteMany({});
+    res.status(200).json({ message: "تم مسح جميع الطلبات بنجاح" });
+  } catch (err) {
+    res.status(500).json({ message: "خطأ في حذف الطلبات", error: err.message });
+  }
+};

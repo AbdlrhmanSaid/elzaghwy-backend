@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema(
     totalAmount: { type: Number, required: true },
     status: {
       type: String,
-      enum: ["معلق", "يتم التحضير", "خرج للتوصيل", "وصل"],
+      enum: ["معلق", "يتم التحضير", "خرج للتوصيل", "وصل", "ملغي"], // أضفنا ملغي هنا
       default: "معلق",
     },
   },
